@@ -1,0 +1,24 @@
+用Anaconda開新的虛擬環境
+pip install quandl numpy pandas matplotlib pystan pytrends plotly yfinance
+conda install -c conda-forge fbprophet
+	#注意 fbprophet 用pip安裝會失敗
+pip install pandas_datareader 
+
+pip install FinMind #也是用來抓股票資料的
+pip install scikit-learn
+pip install tensorflow
+
+拖移縮放圖
+pip install tushare 
+
+資料庫
+pip install mysqlclient
+pip install PyMySQL
+
+語音辨識
+pip install SpeechRecognition
+pip install pipwin
+pipwin install pyaudio
+
+圖轉URL
+pip install pyimgur
