@@ -1,5 +1,5 @@
 var stock_id=$("#get_stock_id").text();
-console.log('ok');
+// console.log('ok');
 $("#History_pic").css("background-image","url(../static/img/img_history/history_"+stock_id+".png)");
 $('#Prophet_pic').css("background-image","url(../static/img/img_prophet/prophet_"+stock_id+".png)");
 
@@ -14,10 +14,10 @@ $(".btn"+stock_id).addClass("border-secondary");
 // 顯示日期
 function  GetDateStr(AddDayCount) { 
     var  dd =  new  Date();
-    dd.setDate(dd.getDate()+AddDayCount); //获取AddDayCount天后的日期
+    dd.setDate(dd.getDate()+AddDayCount); //獲取AddDayCount天後的日期
     var  y = dd.getFullYear(); 
-    var  m = (dd.getMonth()+1)<10? "0" +(dd.getMonth()+1):(dd.getMonth()+1); //获取当前月份的日期，不足10补0
-    var  d = dd.getDate()<10? "0" +dd.getDate():dd.getDate(); //获取当前几号，不足10补0
+    var  m = (dd.getMonth()+1)<10? "0" +(dd.getMonth()+1):(dd.getMonth()+1); //獲取當前月份的日期，不足10補0
+    var  d = dd.getDate()<10? "0" +dd.getDate():dd.getDate(); //獲取當前幾號，不足10補0
     return  m+ "/" +d; 
 }
 
@@ -41,7 +41,7 @@ function future_price() {
 
         //接收server端的回饋訊息result
         success: function (result) {
-            console.log(typeof(result["1"]));
+            // console.log(typeof(result["1"]));
             for(i=1; i<11; i++){
                 // $('.predict'+i.toString()).text("Day"+i.toString()+":"+result[i.toString()])
                 $('.predict'+i.toString()).text(GetDateStr(i)+" : "+result[i.toString()])

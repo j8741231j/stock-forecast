@@ -34,7 +34,6 @@ urlpatterns = [
     path('CheckSignUp/', CheckSignUp),
     path('main/', main),
     path('stockPlay/', stockPlay),
-    path('main/stockPlay.html', stockPlay),
     path('warehouse_table/', warehouse_table),
     path('income_table/', income_table),
     path('buy/', buy),

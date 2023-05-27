@@ -1,0 +1,193 @@
+
+DROP DATABASE stock;
+
+-- MariaDB dump 10.19  Distrib 10.4.18-MariaDB, for Win64 (AMD64)
+--
+-- Host: localhost    Database: stock
+-- ------------------------------------------------------
+-- Server version	10.4.18-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `stock`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `stock` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `stock`;
+
+--
+-- Table structure for table `future`
+--
+
+DROP TABLE IF EXISTS `future`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `future` (
+  `stock_id` varchar(20) NOT NULL,
+  `day_1_predict` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_1_upper` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_1_lower` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_2_predict` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_2_upper` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_2_lower` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_3_predict` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_3_upper` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_3_lower` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_4_predict` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_4_upper` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_4_lower` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_5_predict` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_5_upper` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_5_lower` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_6_predict` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_6_upper` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_6_lower` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_7_predict` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_7_upper` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_7_lower` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_8_predict` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_8_upper` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_8_lower` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_9_predict` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_9_upper` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_9_lower` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_10_predict` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_10_upper` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `day_10_lower` decimal(20,2) NOT NULL DEFAULT 0.00,
+  PRIMARY KEY (`stock_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `future`
+--
+
+LOCK TABLES `future` WRITE;
+/*!40000 ALTER TABLE `future` DISABLE KEYS */;
+INSERT INTO `future` VALUES ('1301',97.74,100.88,94.48,97.56,100.84,94.45,97.25,100.43,94.04,97.05,100.34,93.96,97.09,100.16,93.75,97.32,100.63,94.14,97.57,100.83,94.23,97.66,100.72,94.47,97.62,100.90,94.14,97.60,101.15,94.29),('1303',85.37,87.89,83.04,85.29,87.63,82.80,85.03,87.56,82.70,84.80,87.09,82.30,84.82,87.19,82.37,85.09,87.62,82.78,85.41,87.89,82.90,85.59,87.87,83.03,85.56,87.96,83.07,85.47,87.98,83.11),('2303',57.52,59.42,55.57,57.42,59.39,55.44,57.29,59.29,55.53,57.22,59.17,55.32,57.29,59.32,55.44,57.45,59.56,55.57,57.57,59.36,55.70,57.52,59.37,55.52,57.28,59.12,55.48,56.98,58.82,55.01),('2308',278.33,285.52,271.57,276.57,283.78,269.39,274.15,281.32,267.28,272.18,279.52,265.29,271.27,278.56,264.24,271.04,278.15,263.73,270.62,278.11,263.69,269.54,276.59,262.91,268.09,275.38,261.38,267.02,273.89,260.80),('2317',108.08,111.96,103.86,108.13,111.97,104.55,107.84,111.53,103.96,107.35,111.36,103.48,106.97,110.67,102.97,106.92,110.94,103.29,107.14,110.83,103.56,107.37,111.37,103.70,107.32,111.17,103.63,106.99,110.97,103.26),('2330',575.94,588.32,562.56,574.61,587.62,561.53,571.92,584.17,559.11,569.22,582.19,556.45,567.96,581.97,555.48,568.46,581.25,555.75,569.59,583.21,556.29,569.82,583.36,557.29,568.53,581.75,554.28,566.53,580.66,553.64),('2412',118.34,119.39,117.35,118.53,119.54,117.48,118.63,119.67,117.66,118.67,119.62,117.55,118.71,119.76,117.69,118.80,119.78,117.81,118.97,119.93,117.98,119.22,120.21,118.19,119.51,120.53,118.42,119.79,120.80,118.78),('2454',894.73,926.70,863.76,890.49,919.66,859.70,884.55,912.04,851.60,879.97,908.91,848.62,879.11,910.42,850.17,881.64,910.25,848.92,884.70,915.33,853.89,885.23,914.82,854.71,882.42,913.36,852.71,878.26,907.82,845.65),('2881',78.76,80.28,77.29,78.86,80.30,77.27,78.95,80.50,77.55,79.08,80.67,77.62,79.28,80.82,77.80,79.53,81.14,77.98,79.76,81.24,78.15,79.92,81.47,78.52,80.00,81.60,78.54,80.08,81.70,78.51),('2882',55.36,56.47,54.20,55.34,56.52,54.25,55.30,56.38,54.15,55.27,56.40,54.11,55.29,56.49,54.13,55.35,56.65,54.23,55.41,56.55,54.25,55.44,56.56,54.25,55.42,56.54,54.34,55.40,56.47,54.13);
+/*!40000 ALTER TABLE `future` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `income`
+--
+
+DROP TABLE IF EXISTS `income`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `income` (
+  `username` varchar(20) NOT NULL,
+  `deposit` decimal(20,2) NOT NULL DEFAULT 1000000.00,
+  `buy_2330_price` decimal(20,2) DEFAULT NULL,
+  `sell_2330_gain` decimal(20,2) DEFAULT 0.00,
+  `buy_2454_price` decimal(20,2) DEFAULT NULL,
+  `sell_2454_gain` decimal(20,2) DEFAULT 0.00,
+  `buy_2317_price` decimal(20,2) DEFAULT NULL,
+  `sell_2317_gain` decimal(20,2) DEFAULT 0.00,
+  `buy_2303_price` decimal(20,2) DEFAULT NULL,
+  `sell_2303_gain` decimal(20,2) DEFAULT 0.00,
+  `buy_2308_price` decimal(20,2) DEFAULT NULL,
+  `sell_2308_gain` decimal(20,2) DEFAULT 0.00,
+  `buy_2881_price` decimal(20,2) DEFAULT NULL,
+  `sell_2881_gain` decimal(20,2) DEFAULT 0.00,
+  `buy_1303_price` decimal(20,2) DEFAULT NULL,
+  `sell_1303_gain` decimal(20,2) DEFAULT 0.00,
+  `buy_1301_price` decimal(20,2) DEFAULT NULL,
+  `sell_1301_gain` decimal(20,2) DEFAULT 0.00,
+  `buy_2882_price` decimal(20,2) DEFAULT NULL,
+  `sell_2882_gain` decimal(20,2) DEFAULT 0.00,
+  `buy_2412_price` decimal(20,2) DEFAULT NULL,
+  `sell_2412_gain` decimal(20,2) DEFAULT 0.00,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `income`
+--
+
+LOCK TABLES `income` WRITE;
+/*!40000 ALTER TABLE `income` DISABLE KEYS */;
+INSERT INTO `income` VALUES ('Frank111',1000000.00,NULL,0.00,NULL,0.00,NULL,0.00,NULL,0.00,NULL,0.00,NULL,0.00,NULL,0.00,NULL,0.00,NULL,0.00,NULL,0.00),('Frank123',764689.50,683.60,-60.00,873.00,0.00,104.50,0.00,NULL,-25.00,263.00,0.00,76.51,0.00,NULL,0.00,95.80,0.00,NULL,0.00,115.96,0.00),('Frank222',1000000.00,NULL,0.00,NULL,0.00,NULL,0.00,NULL,0.00,NULL,0.00,NULL,0.00,NULL,0.00,NULL,0.00,NULL,0.00,NULL,0.00);
+/*!40000 ALTER TABLE `income` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `username` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  `email` varchar(40) NOT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES ('Frank111','1111','frank111@gmail.com'),('Frank123','0000','frank123@gmail.com'),('Frank222','222','frank222@gmail.com');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `warehouse`
+--
+
+DROP TABLE IF EXISTS `warehouse`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `warehouse` (
+  `username` varchar(20) NOT NULL,
+  `2330` int(11) NOT NULL DEFAULT 0,
+  `2454` int(11) NOT NULL DEFAULT 0,
+  `2317` int(11) NOT NULL DEFAULT 0,
+  `2303` int(11) NOT NULL DEFAULT 0,
+  `2308` int(11) NOT NULL DEFAULT 0,
+  `2881` int(11) NOT NULL DEFAULT 0,
+  `1303` int(11) NOT NULL DEFAULT 0,
+  `1301` int(11) NOT NULL DEFAULT 0,
+  `2882` int(11) NOT NULL DEFAULT 0,
+  `2412` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `warehouse`
+--
+
+LOCK TABLES `warehouse` WRITE;
+/*!40000 ALTER TABLE `warehouse` DISABLE KEYS */;
+INSERT INTO `warehouse` VALUES ('Frank111',0,0,0,0,0,0,0,0,0,0),('Frank123',5,33,21,0,18,15,0,3,0,12),('Frank222',0,0,0,0,0,0,0,0,0,0);
+/*!40000 ALTER TABLE `warehouse` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2021-08-23 23:49:40

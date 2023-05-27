@@ -1,0 +1,17 @@
+https://dashboard.ngrok.com/get-started/setup 選google登入
+開啟 ngrok
+輸入 ngrok authtoken 1veTfTQSyBAsDdInlp3F7PDQinG_2nUiTUESn4c32HtGFtZnp
+	
+再輸入ngrok http 8000
+
+顯示 Forwarding                    https://fd34-118-170-47-201.ngrok.io -> http://localhost:8000 
+
+更新 Django的setting(每次都不一樣)
+ALLOWED_HOSTS = [
+    'fd34-118-170-47-201.ngrok.io' # 允許的網域名稱  ngrok裡的第2個Forwarding 
+]
+
+更新LINE developers 的Messaging API settings 的Webhook URL 改成 https://fd34-118-170-47-201.ngrok.io/callback/stock_linebot
+
+
+

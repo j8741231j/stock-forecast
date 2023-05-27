@@ -33,10 +33,10 @@ SECRET_KEY = 'django-insecure-$q$%+)%@r^m^)di_u$h$(b9kh071m5ue5wzcgn+r77c3xaj%@m
 DEBUG = True
 
 # ALLOWED_HOSTS = [
-#     'bc0b-118-170-47-201.ngrok.io'
+#     '8964-2001-b011-3004-352f-c4ac-ca4-9209-70f2.ngrok.io'
 #      # 允許的網域名稱  ngrok裡的第2個Forwarding
 # ]
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'myapp',
     'mylinebot',
 ]
-
+# 全局中間件
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

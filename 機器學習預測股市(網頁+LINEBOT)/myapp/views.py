@@ -33,12 +33,13 @@ def login(req):
         username=req.POST['username1']
         password=req.POST['password1']
         cursor.execute("SELECT count(*) FROM user where username=%s and password=%s",[(username),(password)])
-        result = cursor.fetchall()  
+        result = cursor.fetchall()
+        print(result)  
         cursor.close()
         for row in result:
-            # print(row[0])
+            print(row[0])
             if row[0]>0:
-                # print('有此帳號')
+                print('有此帳號')
                 req.session['is_login']=True
                 req.session['username']=username
                 stock_id='2330'
@@ -182,7 +183,7 @@ def income_table(req):
             print(type(i),i)
             mysqldb= MySQLdb.connect(host='localhost',port = 3306,user='root',passwd='',db ='stock')
             cursor = mysqldb.cursor()
-            #這裡破例用字串連接的方式(sell_"+i+"_gain) 寫mysql語法，標準寫法有BUG
+            #這裡破例用字串連接的方式(sell_"+i+"_gain) 寫mysql語法
             cursor.execute("SELECT sell_"+i+"_gain FROM income where username =%s",[(username)])
             result_gain = cursor.fetchall()
             cursor.close()
@@ -265,17 +266,21 @@ def buy(req):
 # 及時股價回傳
 def now_price(req):
     stock_id=str(req.POST['stock_id'])
-    import re 
+    import re,ssl 
     import urllib.request as ur
     url = "https://invest.cnyes.com/twstock/TWS/"+stock_id 
-    content = ur.urlopen(url).read().decode("utf-8")
-    # print(content)
-    match=re.search('<div class="jsx-2941083017 info-lp">(.*?)</div>',content)
-    # print(match.group(1))
-    match=re.search('>(.*?)</span>',match.group(1))
-    # print(match.group(1))
-    print('個股{}即時股價為{}元'.format(stock_id,match.group(1)))
-    return HttpResponse(match.group(1))
+    context = ssl._create_unverified_context()
+    content = ur.urlopen(url, context=context).read().decode("utf-8")
+    match = re.search('<div class="jsx-3098318342 price">(.*?)</div>', content)
+    if match:
+        price = match.group(1)
+        inner_match = re.search('>(.*?)<', price)
+        if inner_match:
+            print(inner_match.group(1))
+            return HttpResponse(inner_match.group(1))
+    else:
+        print("未找到匹配项")
+        return HttpResponse("#")
 
 
 # 搜尋框 GET 表單出去
@@ -296,7 +301,7 @@ def future_table(req):
     print("future_table有接收到")
     if req.method=='POST':
         stock_id=req.POST['stock_id']
-        day=[1,2,3,4,5,6,7,8,9,10]
+        day=range(1,11)
         message={}
         
         for i in day:
@@ -313,7 +318,7 @@ def future_range_lower(req):
     print("lower_range有接收到")
     if req.method=='POST':
         stock_id=req.POST['stock_id']
-        day=[1,2,3,4,5,6,7,8,9,10]
+        day=range(1,11)
         lower={}
         for i in day:
             mysqldb= MySQLdb.connect(host='localhost',port = 3306,user='root',passwd='',db ='stock')
@@ -330,7 +335,7 @@ def future_range_upper(req):
     print("upper_range有接收到")
     if req.method=='POST':
         stock_id=req.POST['stock_id']
-        day=[1,2,3,4,5,6,7,8,9,10]
+        day=range(1,11)
         upper={}
         # lower={}
         for i in day:

@@ -1,0 +1,52 @@
+django-admin startproject django_example
+#django_example 是專案資料夾名
+cd django_example
+python manage.py startapp myapp
+md templates
+md static
+到setting.py裡
+from os import path 
+在INSTALLED_APPS=[]裡 增加'myapp',
+在TEMPLATES = [裡 填寫 'DIRS': [path.join(BASE_DIR, 'templates')],
+改時區
+LANGUAGE_CODE = 'zh-hant'
+TIME_ZONE = 'Asia/Taipei'
+
+在STATIC_URL = '/static/'下面一行加入
+	STATICFILES_DIRS=[ path.join(BASE_DIR, 'static'), ]
+
+啟動伺服器看看
+	python manage.py runserver
+
+views.py裡加入		#views.py 寫網址對應的動作
+	from django.http import HttpResponse
+	from django.shortcuts import render
+
+	就可以開始寫func了
+	# 傳訊息
+	def sayhellosomebody(req,username):
+		return HttpResponse('Hello World!'+username)
+
+	#傳網址
+	def index(req):
+		now=datetime.now()
+		return render(req,'index.html',{'now':now})
+		#也可寫return render(req,'index.html',locals()) 傳遞所有區域變數
+	
+urls.py裡加入		#urls.py 寫網址
+	from django.contrib import admin
+	from django.urls import path
+	from myapp.views import djget, djpost, sayhello
+
+	urlpatterns = [
+		path('admin/', admin.site.urls),
+		path('', sayhello),
+		path('who/<str:username>', sayhellosomebody),
+		path('index/', index),
+		path('djget/', djget),
+		path('djpost/', djpost),
+		]
+
+
+登入系統
+python manage.py migrate
