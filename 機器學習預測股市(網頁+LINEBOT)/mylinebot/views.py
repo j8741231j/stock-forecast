@@ -5,7 +5,7 @@ from django.conf import settings
  
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
-from linebot.models import MessageEvent,TextMessage, TextSendMessage,TemplateSendMessage,ButtonsTemplate,MessageTemplateAction,ImageSendMessage
+from linebot.models import MessageEvent,TextMessage, TextSendMessage,TemplateSendMessage,ButtonsTemplate,MessageTemplateAction,ImageSendMessage,CarouselTemplate,CarouselColumn
 import MySQLdb
 import os
 import speech_recognition as sr # 語音辨識 套件
@@ -57,7 +57,7 @@ def callback(request):
                     if event.message.text in stock_ids: 
                         # 連資料庫獲取未來股價
                         stock_id=event.message.text
-                        day=[1,2,3,4,5,6,7,8,9,10]
+                        day=range(1,11)
                         future=''
                         for i in day:
                             # print("有進for") 
@@ -75,9 +75,14 @@ def callback(request):
                         reply_arr.append(ImageSendMessage(original_content_url=img_url,preview_image_url=img_url))
                         line_bot_api.reply_message( event.reply_token, reply_arr )
                     elif event.message.text=='？' or event.message.text=='?':
-                        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='使用說明 :\n\n輸入或說出「股票代碼」\n即會顯示當前「股票」的即時價格\n及「未來10天的股價預測值」\n\n有提供服務的股票:\n「2330」 : 台積電\n「2454」 : 聯發科\n「2317」 : 鴻海\n「2303」 : 聯電\n「2308」 : 台達電\n「2881」 : 富邦金\n「1303」 : 南亞\n「1301」 : 台塑\n「2882」 : 國泰金\n「2412」 : 中華電'))
+                        # line_bot_api.reply_message(event.reply_token,TextSendMessage(text='使用說明 :\n\n輸入或說出「股票代碼」\n即會顯示當前「股票」的即時價格\n及「未來10天的股價預測值」\n\n有提供服務的股票:\n「2330」 : 台積電\n「2454」 : 聯發科\n「2317」 : 鴻海\n「2303」 : 聯電\n「2308」 : 台達電\n「2881」 : 富邦金\n「1303」 : 南亞\n「1301」 : 台塑\n「2882」 : 國泰金\n「2412」 : 中華電'))
+                        Carousel_template=tep()   
+                        line_bot_api.reply_message(event.reply_token,Carousel_template)
+                        
                     else:
                         line_bot_api.reply_message(event.reply_token,TextSendMessage(text="很抱歉，我們沒有提供此個股的資料"))
+                        
+                        
 
                 elif event.message.type=='audio':
                     # message.append(TextSendMessage(text='聲音訊息'))
@@ -110,7 +115,8 @@ def callback(request):
                         reply_arr.append(ImageSendMessage(original_content_url=img_url,preview_image_url=img_url))
                         line_bot_api.reply_message( event.reply_token, reply_arr )
                     else:
-                        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="很抱歉，我們沒有提供此個股的資料"))
+                        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="很抱歉喔，我們沒有提供此個股的資料"))
+                        
 
                 cursor.close()#關閉資料庫連線
                 return HttpResponse()
@@ -182,3 +188,90 @@ def now_price(stock_id):
     # print(match.group(1))
     print('個股{}即時股價為{}元'.format(stock_id,match.group(1)))
     return match.group(1)
+
+#模板
+def tep():
+    Carousel_template = TemplateSendMessage(
+                        alt_text='Carousel template',
+                        template=CarouselTemplate(
+                        columns=[
+                            CarouselColumn(
+                                title='使用說明1',
+                                text='點選「股票代碼」即會顯示當前股價，並列出未來股價及趨勢圖。',
+                                actions=[
+                                   MessageTemplateAction(
+                                        label='2330台積電',
+                                        text='2330'
+                                    ),
+                                    MessageTemplateAction(
+                                        label='2454聯發科',
+                                        text='2454'
+                                    ),
+                                    MessageTemplateAction(
+                                        label='2317鴻海',
+                                        text='2317'
+                                    ),
+                                ],
+                                thumbnail_image_url='https://i.imgur.com/K2mqDha.jpg',
+                            ),
+                            CarouselColumn(
+                                title='使用說明2',
+                                text='或語音輸入「股票代碼」即會顯示當前股價，並列出未來股價及趨勢圖。',
+                                actions=[
+                                   MessageTemplateAction(
+                                        label='2303聯電',
+                                        text='2303'
+                                    ),
+                                    MessageTemplateAction(
+                                        label='2308台達電',
+                                        text='2308'
+                                    ),
+                                    MessageTemplateAction(
+                                        label='2881富邦金',
+                                        text='2881'
+                                    ),
+                                ],
+                                thumbnail_image_url='https://i.imgur.com/M96IGFV.jpg',
+                            ),
+                            CarouselColumn(
+                                title='及時股價',
+                                text='為您顯示及時的股價。',
+                                actions=[
+                                  MessageTemplateAction(
+                                        label='1303南亞',
+                                        text='1303'
+                                    ),
+                                    MessageTemplateAction(
+                                        label='1301台塑',
+                                        text='1301'
+                                    ),
+                                    MessageTemplateAction(
+                                        label='2882國泰金',
+                                        text='2882'
+                                    ),
+                                ],
+                                thumbnail_image_url='https://i.imgur.com/M6DR6Oa.jpg',
+                            ),
+                            CarouselColumn(
+                                title='未來股價',
+                                text='提供未來10天的預測股價及趨勢圖。',
+                                actions=[
+                                  MessageTemplateAction(
+                                        label='2412中華電',
+                                        text='2412'
+                                    ),
+                                    MessageTemplateAction(
+                                        label='更多',
+                                        text=' '
+                                    ),
+                                    MessageTemplateAction(
+                                        label=' ',
+                                        text=' '
+                                    ),
+                                ],
+                                thumbnail_image_url='https://i.imgur.com/wdRfgpc.jpg',
+                            ),
+                        ]
+                    )
+                    )
+    return Carousel_template
